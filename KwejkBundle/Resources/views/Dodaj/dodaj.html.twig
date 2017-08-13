@@ -1,0 +1,26 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}KwejkBundle:Dodaj:Dodaj{% endblock %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Dodaj nowy obrazek
+
+            </h1>
+        </div>
+    </div>
+
+    <div style="align-content: center; position:relative; left:50%;width: 600px;height: 150px; background-color: lightseagreen ;border-radius: 20px 20px 20px 20px; ">
+        <form action="{{ path('dodaj') }}" method="POST" >
+
+            Tytuł: <br /> <input type="text" name="tytul" /> <br />
+            Ścieżka: <br /> <input type="text" name="sciezka" /> <br />
+
+            <input type="submit" value="Dodaj obrazek" />
+
+        </form>
+    </div>
+
+{% endblock %}

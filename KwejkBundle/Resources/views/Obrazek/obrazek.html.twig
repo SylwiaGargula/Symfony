@@ -1,0 +1,95 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}KwejkBundle:Obrazek:Obrazek{% endblock %}
+
+{% block body %}
+    <div style="position:relative;left:700px"  />
+
+
+    <div class="row" style="align-content: center" >
+                <div class="col-xs-9"  >
+                    <img class="img-responsive"  style="border-radius: 20px 20px 20px 20px;box-shadow: 0 0 20px 10px lightseagreen" src="{{ obrazek.getSciezka()}}" alt={{ obrazek.getTytul() }}>
+                    <br/>
+                </div>
+        </div>
+
+
+<form action="{{ path('dodajkomentarz',{'slug': obrazek.getID()})}}" method="post">
+
+<br>
+
+<div class="row" style="align-content: center" >
+
+        <div class="form-group" style="width: 500px">
+            <label for="comment">Wpisz komentarz</label>
+            <textarea class="form-control" rows="6" name="senderText">{% if tekst is defined %} {{  tekst }} {% endif %}</textarea>
+        </div>
+
+    </div>
+    </br>
+    <div class="row"  >
+
+        <span class="glyphicon glyphicon-heart-empty"></span>
+        <label class="radio-inline" ><input type="radio" name="optradio" value="1"> 1</label>
+        <label class="radio-inline"><input type="radio" name="optradio" value="2">2</label>
+        <label class="radio-inline"><input type="radio" name="optradio" value="3">3</label>
+        <label class="radio-inline"><input type="radio" name="optradio" value="4">4</label>
+        <label class="radio-inline"><input type="radio" name="optradio" value="5">5</label>
+        <span class="glyphicon glyphicon-heart"></span>
+
+    </div>
+    </br>
+
+<div class="row" style="align-content: center" >
+    <input type="submit" value="Dodaj komentarz" />
+    </div>
+
+</form>
+
+
+    <div class="row" >
+        <label >Komentarze</label>
+
+        {% for komentarz in obrazek.getKomentarze() %}
+
+
+        <div class="box" style="background-color: lightseagreen ;border-radius: 20px 20px 20px 20px; width: 50%;box-shadow: inset -5px -5px 10px;">
+
+    {{ komentarz.getUzytkownik().getLogin() }}
+    napisał/a
+            <br/>
+            <span style="position: relative; left: 50px">
+    {{ komentarz.getTresc() }}
+
+    {% for i in 1..komentarz.getOcena() %}
+    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+    {% endfor %}
+       </span>
+            {% if komentarz.getUzytkownik().getLogin()==imieuzytkownika %}
+
+<div>
+<form action="{{ path('edycja',{'slug': obrazek.getID()})}}" method="post">
+    <div class="btn-group"  >
+        <input type="number" name="numer" value="{{ komentarz.Id }}" style="display: none">
+            <button type="submit" class="btn btn-primary" name="options" id="option2" style="position: relative;left: 50px" value="edycja"><span class="glyphicon glyphicon-edit" aria-hidden="true">Edytuj</span></button>
+             <button type="submit" class="btn btn-primary" name="options" id="option2" style="position: relative;left: 100px" value="kasuj"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true">Usuń</span></button>
+</div>
+</form>
+
+
+
+    </div>
+            {% endif %}
+            <br/>
+            <br/>
+            </div>
+        <br/>
+    {% endfor %}
+
+
+
+
+        </div>
+    </div>
+
+{% endblock %}

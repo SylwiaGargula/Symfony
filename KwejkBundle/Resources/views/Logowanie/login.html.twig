@@ -1,0 +1,25 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}KwejkBundle:Logowanie:login{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Logowanie
+                <small>Zaloguj się</small>
+            </h1>
+        </div>
+    </div>
+
+    <div style="align-content: center; position:relative; left:50%;width: 600px;height: 150px; background-color: lightseagreen ;border-radius: 20px 20px 20px 20px; ">
+        <form action="{{ path('login') }}" method="post">
+{% if komunikat is defined %}
+            {{ komunikat }}
+            {% endif %}
+            Login: <br /> <input type="text" name="login" /> <br />
+            Hasło: <br /> <input type="password" name="haslo" /> <br /><br />
+            <input type="submit" value="Zaloguj się" />
+
+        </form>
+    </div>
+{% endblock %}

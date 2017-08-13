@@ -1,0 +1,52 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}KwejkBundle:Najlepsze:Najlepsze{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">10 {{ opis }}
+                <small></small>
+
+            </h1>
+        </div>
+    </div>
+
+    <div style="align-content: center; position:relative; left:50%;width: 600px;height: 900px">
+    {% for obrazek in obrazki %}
+
+            </br>
+            </br>
+
+            <a  href="{{ path("podstrona",{'slug': obrazek.getID()}) }}">
+                </br>
+                </br>
+                </br>
+
+                <img class="img-responsive" style="border-radius: 20px 20px 20px 20px;box-shadow: 0 0 20px 10px lightseagreen"src="{{ obrazek.getSciezka()}}" alt={{ obrazek.getTytul() }}>
+            </a>
+            <div class="col-xs-9"  >
+                {{ obrazek.getLicznikplusow() }}
+                <label >Daj łapkę!</label>
+
+                {% if x is defined %}
+                <form action="{{ path('najwiecejkomentarzy') }}" method="post">
+                    {% endif %}
+
+                    {% if y is defined %}
+                    <form action="{{ path('najwiecejplusow') }}" method="post">
+                        {% endif %}
+                <div class="btn-group"  >
+                    <input type="number" name="numer" value="{{ obrazek.Id }}" style="display: none">
+                    <button type="submit" class="btn btn-primary" name="options" id="option1"   value="+" style="background: green"> <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></button>
+                    <button type="submit" class="btn btn-primary" name="options" id="option2"   value="-" style="background: red"><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span></button>
+
+                </div>
+</form>
+
+            </div>
+
+    {% endfor %}
+   </div>
+    </div>
+{% endblock %}
